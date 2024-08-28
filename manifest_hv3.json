@@ -7,7 +7,7 @@
         "chipFamily": "ESP32",
         "parts": [
           {
-            "path": "vv_hv3_001.bin",
+            "path": "vv_hv3_001.elf",
             "offset": 0
           }
         ]
