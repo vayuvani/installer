@@ -1,0 +1,16 @@
+{
+    "name": "VayuVani",
+    "version": "0.0.1-alpha",
+    "new_install_prompt_erase": true,
+    "builds": [
+      {
+        "chipFamily": "ESP32",
+        "parts": [
+          {
+            "path": "vv_hv3_001.bin",
+            "offset": 0
+          }
+        ]
+      }
+    ]
+  }
