@@ -6,10 +6,9 @@
       {
         "chipFamily": "ESP32",
         "parts": [
-          {
-            "path": "vv_hv3_001.elf",
-            "offset": 0
-          }
+          { "path": "firmware/bootloader.bin", "offset": 4096 },
+          { "path": "firmware/partitions.bin", "offset": 32768 },
+          { "path": "firmware/vv_hv3_001.bin", "offset": 65536 }
         ]
       }
     ]
