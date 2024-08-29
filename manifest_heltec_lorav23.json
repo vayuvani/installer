@@ -8,6 +8,12 @@
         "parts": [
           { "path": "VayuVani-0.0.1-alpha-heltec_wifi_lora_v3_merged.bin", "offset": 0 }         
         ]
+      },
+      {
+        "chipFamily": "ESP32",
+        "parts": [
+          { "path": "VayuVani-0.0.1-alpha-heltec_wifi_lora_merged.bin", "offset": 0 }         
+        ]
       }
     ]
 }
