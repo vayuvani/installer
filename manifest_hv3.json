@@ -4,7 +4,7 @@
     "new_install_prompt_erase": true,
     "builds": [
       {
-        "chipFamily": "esp32s3",
+        "chipFamily": "ESP32-S3",
         "parts": [
           { "path": "firmware/boot_app0.bin", "offset": "0xe000" },
           { "path": "firmware/bootloader.bin", "offset": "0x0000" },
