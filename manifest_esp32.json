@@ -1,24 +1,24 @@
 {
   "name": "VayuVani",
-  "version": "0.0.1-alpha-29-gb9c71bf-20240908",
+  "version": "0.0.1-alpha-31-g0dbc0fd-20240908",
   "new_install_prompt_erase": true,
   "builds": [
     {
       "chipFamily": "ESP32",
       "parts": [
-        { "path": "VayuVani-0.0.1-alpha-30-g4280093-20240908-esp32_merged.bin", "offset": 0 }         
+        { "path": "VayuVani-0.0.1-alpha-31-g0dbc0fd-20240908-esp32_merged.bin", "offset": 0 }         
       ]
     },
     {
       "chipFamily": "ESP32-C3",
       "parts": [
-        { "path": "VayuVani-0.0.1-alpha-30-g4280093-20240908-esp32c3_merged.bin", "offset": 0 }         
+        { "path": "VayuVani-0.0.1-alpha-31-g0dbc0fd-20240908-esp32c3_merged.bin", "offset": 0 }         
       ]
     },
     {
       "chipFamily": "ESP32-S3",
       "parts": [
-        { "path": "VayuVani-0.0.1-alpha-30-g4280093-20240908-esp32s3_merged.bin", "offset": 0 }         
+        { "path": "VayuVani-0.0.1-alpha-31-g0dbc0fd-20240908-esp32s3_merged.bin", "offset": 0 }         
       ]
     }
   ]
