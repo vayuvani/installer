@@ -8,6 +8,12 @@
         "parts": [
           { "path": "VayuVani-1.0.0-alpha-esp32_merged.bin", "offset": 0 }         
         ]
+      },
+      {
+        "chipFamily": "ESP32-S3",
+        "parts": [
+          { "path": "VayuVani-1.0.0-alpha-esp32s3_merged.bin", "offset": 0 }         
+        ]
       }      
     ]
 }
