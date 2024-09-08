@@ -1,24 +1,18 @@
 {
     "name": "VayuVani",
-    "version": "1.0.0-alpha",
+    "version": "0.0.1-alpha",
     "new_install_prompt_erase": true,
     "builds": [
       {
         "chipFamily": "ESP32-S3",
         "parts": [
-          { "path": "VayuVani-1.0.0-alpha-esp32s3_merged.bin", "offset": 0 }         
+          { "path": "VayuVani-0.0.1-alpha-heltec_wifi_lora_v3_merged.bin", "offset": 0 }         
         ]
       },
       {
         "chipFamily": "ESP32",
         "parts": [
-          { "path": "VayuVani-1.0.0-alpha-esp32_merged.bin", "offset": 0 }         
-        ]
-      },
-      {
-        "chipFamily": "ESP32-C3",
-        "parts": [
-          { "path": "VayuVani-1.0.0-alpha-esp32c3_merged.bin", "offset": 0 }         
+          { "path": "VayuVani-0.0.1-alpha-heltec_wifi_lora_merged.bin", "offset": 0 }         
         ]
       }
     ]
