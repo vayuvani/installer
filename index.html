@@ -85,39 +85,63 @@
       <option value="">-- Loading Versions --</option>
     </select>
 
-    <script>
-      fetch('versions.json')
-      .then(response => response.json())
-      .then(versions => {
-        const versionSelect = document.getElementById('version-select');
-        versionSelect.innerHTML = '<option value="">-- Select Version --</option>';
-        versions.sort().reverse(); // Optional: sort versions, newest first
-        versions.forEach(version => {
-          const option = document.createElement('option');
-          option.value = `manifest_v${version}.json`;
-          option.textContent = `Version ${version}`;
-          versionSelect.appendChild(option);
-        });
-      });
-
-      const installButton = document.getElementById('install-button');
-      const versionSelect = document.getElementById('version-select');
-
-      versionSelect.addEventListener('change', () => {
-        const selectedManifest = versionSelect.value;
-        if (selectedManifest) {
-          installButton.manifest = selectedManifest;
-          installButton.classList.remove('invisible');
-        } else {
-          installButton.classList.add('invisible');
-        }
-      });
-    </script>
-
-
     <p class="button-row" align="center">
-      <esp-web-install-button manifest="./manifest.json"></esp-web-install-button>
+      <!-- Placeholder for the install button -->
+    <div id="install-button-container"></div>
     </p>
   </div>
+
+  <script>
+    const versionSelect = document.getElementById('version-select');
+    const installButtonContainer = document.getElementById('install-button-container');
+
+    // Fetch versions.json and populate the dropdown
+    fetch('versions.json')
+    .then(response => response.json())
+    .then(versions => {
+      // Clear the loading message
+      versionSelect.innerHTML = '<option value="">-- Select Version --</option>';
+
+      // Optional: Sort versions, newest first
+      versions.sort().reverse();
+
+      // Populate the dropdown with versions
+      versions.forEach(version => {
+        const option = document.createElement('option');
+        option.value = `manifest_v${version}.json`;
+        option.textContent = `Version ${version}`;
+        versionSelect.appendChild(option);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching versions:', error);
+      versionSelect.innerHTML = '<option value="">-- Error Loading Versions --</option>';
+    });
+
+    // Update the install button when a version is selected
+    versionSelect.addEventListener('change', () => {
+      const selectedManifest = versionSelect.value;
+      // Remove existing install button if any
+      installButtonContainer.innerHTML = '';
+
+      if (selectedManifest) {
+        // Create a new install button with the selected manifest
+        const installButton = document.createElement('esp-web-install-button');
+        installButton.setAttribute('manifest', selectedManifest);
+
+        // Optionally, add other attributes or event listeners
+        // For example, you can listen to events like 'flashstart' and 'flashend'
+        installButton.addEventListener('flashstart', () => {
+          console.log('Flashing started');
+        });
+        installButton.addEventListener('flashend', () => {
+          console.log('Flashing ended');
+        });
+
+        // Append the new install button to the container
+        installButtonContainer.appendChild(installButton);
+      }
+    });
+  </script>
   </body>
 </html>
