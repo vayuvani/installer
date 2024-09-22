@@ -47,7 +47,7 @@ jobs:
         run: node generate-manifest.js
 
 
-      - name: Commit manifest.json
+      - name: Commit and Push Changes
         env:
           GIT_AUTHOR_NAME: GitHub Actions
           GIT_AUTHOR_EMAIL: actions@github.com
@@ -59,8 +59,7 @@ jobs:
           git config user.email "$GIT_AUTHOR_EMAIL"
           git add manifest*.json
           git add versions.json
-          git commit -m "Update manifest.json"
-          git push
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update manifest.json" && git push)
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
