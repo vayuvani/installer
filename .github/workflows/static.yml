@@ -29,6 +29,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+      name: GITHUB_TOKEN
+      url: ${{ secrets.GITHUB_TOKEN }}
     runs-on: ubuntu-latest
 
     steps:
@@ -58,8 +60,6 @@ jobs:
           git add manifest.json
           git commit -m "Update manifest.json"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
