@@ -1,58 +1,49 @@
 const fs = require('fs');
 const path = require('path');
 
-// Define paths
+// Path to the versions directory
 const versionsDir = path.join(__dirname, 'versions');
-const manifestPath = path.join(__dirname, 'manifest.json');
 
-// Initialize manifest object
-const manifest = {
-  "name": "VayuVani",
-  "new_install_prompt_erase": true,
-  "builds": []
-};
+// Read all directories inside the versions directory
+const versions = fs.readdirSync(versionsDir).filter(version => {
+  const versionPath = path.join(versionsDir, version);
+  return fs.statSync(versionPath).isDirectory();
+});
 
-// Supported chip families and their corresponding IDs
-const chipFamilies = [
-  { name: "ESP32", id: "esp32" },
-  { name: "ESP32-C3", id: "esp32c3" },
-  { name: "ESP32-S3", id: "esp32s3" }
-];
+versions.forEach(versionId => {
+  const manifest = {
+    "name": "VayuVani",
+    "version": versionId,
+    "new_install_prompt_erase": true,
+    "builds": []
+  };
 
-// Read all version directories
-const versionDirs = fs.readdirSync(versionsDir).filter(file =>
-    fs.statSync(path.join(versionsDir, file)).isDirectory()
-);
+  const chipFamilies = [
+    { family: "ESP32", id: "esp32" },
+    { family: "ESP32-C3", id: "esp32c3" },
+    { family: "ESP32-S3", id: "esp32s3" }
+  ];
 
-// Iterate over each version directory
-versionDirs.forEach(versionId => {
-  chipFamilies.forEach(({ name: chipFamily, id: chipId }) => {
-    const binFilename = `VayuVani-${versionId}-${chipId}_merged.bin`;
-    const binRelativePath = path.join('versions', versionId, binFilename);
-    const binAbsolutePath = path.join(versionsDir, versionId, binFilename);
+  chipFamilies.forEach(({ family, id }) => {
+    const binPath = `./versions/${versionId}/VayuVani-${versionId}-${id}_merged.bin`;
+    const absoluteBinPath = path.join(__dirname, binPath);
 
-    if (fs.existsSync(binAbsolutePath)) {
-      // Find or create the build entry for this chip family
-      let build = manifest.builds.find(b => b.chipFamily === chipFamily);
-      if (!build) {
-        build = {
-          "chipFamily": chipFamily,
-          "variants": []
-        };
-        manifest.builds.push(build);
-      }
-
-      // Add the variant for this version
-      build.variants.push({
-        "name": `Version ${versionId}`,
+    if (fs.existsSync(absoluteBinPath)) {
+      manifest.builds.push({
+        "chipFamily": family,
         "parts": [
-          { "path": `./${binRelativePath}`, "offset": 0 }
+          { "path": binPath, "offset": 0 }
         ]
       });
     }
   });
+
+  // Write the manifest file for this version
+  const manifestFilename = `manifest_v${versionId}.json`;
+  fs.writeFileSync(manifestFilename, JSON.stringify(manifest, null, 2));
+  console.log(`Generated ${manifestFilename}`);
 });
 
-// Write the manifest to file
-fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
-console.log(`Manifest generated at ${manifestPath}`);
+// After generating all manifest files, write versions.json
+fs.writeFileSync('versions.json', JSON.stringify(versions, null, 2));
+console.log('Generated versions.json');

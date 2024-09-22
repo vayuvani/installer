@@ -80,7 +80,41 @@
   <body>
   <div class="content">
     <h1>VayuVani Installer</h1>
-    <p>Select your board and version from the installer.</p>
+    <p>Select firmware version:</p>
+    <select id="version-select">
+      <option value="">-- Loading Versions --</option>
+    </select>
+
+    <script>
+      fetch('versions.json')
+      .then(response => response.json())
+      .then(versions => {
+        const versionSelect = document.getElementById('version-select');
+        versionSelect.innerHTML = '<option value="">-- Select Version --</option>';
+        versions.sort().reverse(); // Optional: sort versions, newest first
+        versions.forEach(version => {
+          const option = document.createElement('option');
+          option.value = `manifest_v${version}.json`;
+          option.textContent = `Version ${version}`;
+          versionSelect.appendChild(option);
+        });
+      });
+
+      const installButton = document.getElementById('install-button');
+      const versionSelect = document.getElementById('version-select');
+
+      versionSelect.addEventListener('change', () => {
+        const selectedManifest = versionSelect.value;
+        if (selectedManifest) {
+          installButton.manifest = selectedManifest;
+          installButton.classList.remove('invisible');
+        } else {
+          installButton.classList.add('invisible');
+        }
+      });
+    </script>
+
+
     <p class="button-row" align="center">
       <esp-web-install-button manifest="./manifest.json"></esp-web-install-button>
     </p>
