@@ -75,28 +75,15 @@
       }
     </style>
 <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
-    
+
   </head>
   <body>
-    <div class="content">
-      <h1>VayuVani installer</h1>
-      <p>Select your board</p>
-      <ul class="radios">        
-        <li>
-          <label><input type="radio" name="type" value="esp32" />ESP 32 Chip (S3,C3) </label>
-        </li>       
-      </ul>
-      <p class="button-row" align="center">
-        <esp-web-install-button class="invisible"></esp-web-install-button>
-      </p>
-    <script>
-      document.querySelectorAll('input[name="type"]').forEach(radio =>
-        radio.addEventListener("change", () => {
-          const button = document.querySelector('esp-web-install-button');
-          button.manifest = `./manifest_${radio.value}.json`;
-          button.classList.remove('invisible');
-        }
-      ));
-    </script>
+  <div class="content">
+    <h1>VayuVani Installer</h1>
+    <p>Select your board and version from the installer.</p>
+    <p class="button-row" align="center">
+      <esp-web-install-button manifest="./manifest.json"></esp-web-install-button>
+    </p>
+  </div>
   </body>
 </html>
