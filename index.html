@@ -1,147 +1,194 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>VayuVani Groundstation installer</title>
-    <meta
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
       name="description"
-    />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="color-scheme" content="dark light" />
-    <style>
-      body {
-        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Ubuntu, sans-serif;
-        padding: 0;
-        margin: 0;
-        line-height: 1.4;
-      }
-      .content {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 12px;
-      }
-      h2 {
-        margin-top: 2em;
-      }
-      h3 {
-        margin-top: 1.5em;
-      }
-      a {
-        color: #03a9f4;
-      }
-      .invisible {
-        visibility: hidden;
-      }
-      .hidden {
-        display: none;
-      }
-      esp-web-install-button[install-unsupported] {
-        visibility: inherit;
-      }
-      .content pre {
-        max-width: 100%;
-        overflow-y: scroll;
-      }
-      .footer {
-        margin-top: 24px;
-        border-top: 1px solid #ccc;
-        padding-top: 24px;
-        text-align: center;
-      }
-      .footer .initiative {
-        font-style: italic;
-        margin-top: 16px;
-      }
-      table {
-        border-spacing: 0;
-      }
-      td {
-        padding: 8px;
-        border-bottom: 1px solid #ccc;
-      }
-      .radios li {
-        list-style: none;
-        line-height: 2em;
-      }
-      @media (prefers-color-scheme: dark) {
-        body {
-          background-color: #333;
-          color: #fff;
-        }
-        a {
-          color: #58a6ff;
-        }
-      }
-    </style>
-<script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+      content="VayuVani by Chandra (@tckb) - a self managed LoRa Groundstation part of MoonAndBeyond.Blog"
+  />
+  <link rel="apple-touch-icon" href="logo.png" />
+  <title>.:: VayuVani by @tckb - a self managed LoRa Groundstation ::.</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
-  </head>
-  <body>
-  <div class="content">
-    <h1>VayuVani Installer</h1>
-    <p>Select firmware version:</p>
-    <select id="version-select">
-      <option value="">-- Loading Versions --</option>
-    </select>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-    <p class="button-row" align="center">
-      <!-- Placeholder for the install button -->
-    <div id="install-button-container"></div>
-    </p>
+    .title-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      margin: 32px auto;
+      width: 100%;
+      max-width: 1024px;
+      box-sizing: border-box;
+    }
+
+    .logo-container {
+      margin-right: 15px;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .text-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-title {
+      font-size: 2rem;
+      font-weight: 500;
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .sub-title {
+      font-size: 1rem;
+      color: #bbd2f3;
+      margin-top: 4px;
+      font-weight: 400;
+    }
+
+    #content {
+      text-align: center;
+      padding: 20px;
+      background-color: white;
+      border-radius: 4px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+      width: 100%;
+      max-width: 1024px;
+      box-sizing: border-box;
+    }
+
+    #content h1 {
+      color: #1e3c72;
+      margin-bottom: 20px;
+    }
+
+    #firmware-select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #install-button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+    }
+  </style>
+</head>
+<script
+    type="module"
+    src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"
+></script>
+<body>
+<div class="title-container">
+  <div class="logo-container">
+    <img src="logo.png" alt="VayuVani Logo" class="logo">
   </div>
+  <div class="text-container">
+    <h1 class="main-title">VayuVani</h1>
+    <p class="sub-title">Groundstation firmware Installer</p>
+  </div>
+</div>
 
-  <script>
-    const versionSelect = document.getElementById('version-select');
-    const installButtonContainer = document.getElementById('install-button-container');
+<div id="content">
+  <p>Select firmware version:</p>
+  <select id="version-select">
+    <option value="">-- Loading Versions --</option>
+  </select>
+  <p class="button-row" align="center">
+    <!-- Placeholder for the install button -->
+  <div id="install-button-container"></div>
+</div>
+<script>
+  const versionSelect = document.getElementById('version-select');
+  const installButtonContainer = document.getElementById('install-button-container');
 
-    // Fetch versions.json and populate the dropdown
-    fetch('versions.json')
-    .then(response => response.json())
-    .then(versions => {
-      // Clear the loading message
-      versionSelect.innerHTML = '<option value="">-- Select Version --</option>';
+  // Fetch versions.json and populate the dropdown
+  fetch('versions.json')
+  .then(response => response.json())
+  .then(versions => {
+    // Clear the loading message
+    versionSelect.innerHTML = '<option value="">-- Select Version --</option>';
 
-      // Optional: Sort versions, newest first
-      versions.sort().reverse();
+    // Optional: Sort versions, newest first
+    versions.sort().reverse();
 
-      // Populate the dropdown with versions
-      versions.forEach(version => {
-        const option = document.createElement('option');
-        option.value = `manifest_v${version}.json`;
-        option.textContent = `Version ${version}`;
-        versionSelect.appendChild(option);
+    // Populate the dropdown with versions
+    versions.forEach(version => {
+      const option = document.createElement('option');
+      option.value = `manifest_v${version}.json`;
+      option.textContent = `Version ${version}`;
+      versionSelect.appendChild(option);
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching versions:', error);
+    versionSelect.innerHTML = '<option value="">-- Error Loading Versions --</option>';
+  });
+
+  // Update the install button when a version is selected
+  versionSelect.addEventListener('change', () => {
+    const selectedManifest = versionSelect.value;
+    // Remove existing install button if any
+    installButtonContainer.innerHTML = '';
+
+    if (selectedManifest) {
+      // Create a new install button with the selected manifest
+      const installButton = document.createElement('esp-web-install-button');
+      installButton.setAttribute('manifest', selectedManifest);
+
+      // Optionally, add other attributes or event listeners
+      // For example, you can listen to events like 'flashstart' and 'flashend'
+      installButton.addEventListener('flashstart', () => {
+        console.log('Flashing started');
       });
-    })
-    .catch(error => {
-      console.error('Error fetching versions:', error);
-      versionSelect.innerHTML = '<option value="">-- Error Loading Versions --</option>';
-    });
+      installButton.addEventListener('flashend', () => {
+        console.log('Flashing ended');
+      });
 
-    // Update the install button when a version is selected
-    versionSelect.addEventListener('change', () => {
-      const selectedManifest = versionSelect.value;
-      // Remove existing install button if any
-      installButtonContainer.innerHTML = '';
-
-      if (selectedManifest) {
-        // Create a new install button with the selected manifest
-        const installButton = document.createElement('esp-web-install-button');
-        installButton.setAttribute('manifest', selectedManifest);
-
-        // Optionally, add other attributes or event listeners
-        // For example, you can listen to events like 'flashstart' and 'flashend'
-        installButton.addEventListener('flashstart', () => {
-          console.log('Flashing started');
-        });
-        installButton.addEventListener('flashend', () => {
-          console.log('Flashing ended');
-        });
-
-        // Append the new install button to the container
-        installButtonContainer.appendChild(installButton);
-      }
-    });
-  </script>
-  </body>
+      // Append the new install button to the container
+      installButtonContainer.appendChild(installButton);
+    }
+  });
+</script>
+</body>
 </html>
