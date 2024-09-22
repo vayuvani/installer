@@ -3,12 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta
-      name="description"
-      content="VayuVani by Chandra (@tckb) - a self managed LoRa Groundstation part of MoonAndBeyond.Blog"
-  />
-  <link rel="apple-touch-icon" href="logo.png" />
-  <title>.:: VayuVani by @tckb - a self managed LoRa Groundstation ::.</title>
+  <title>VayuVani Installer</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@9.4.3/dist/web/install-button.js?module"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 
@@ -33,7 +29,7 @@
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
       margin: 32px auto;
       width: 100%;
-      max-width: 1024px;
+      max-width: 900px;
       box-sizing: border-box;
     }
 
@@ -44,7 +40,6 @@
     .logo {
       width: 60px;
       height: 60px;
-      animation: pulse 3s infinite ease-in-out;
     }
 
     .text-container {
@@ -77,16 +72,16 @@
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       margin-top: 20px;
       width: 100%;
-      max-width: 1024px;
+      max-width: 900px;
       box-sizing: border-box;
     }
 
-    #content h1 {
+    #content h2 {
       color: #1e3c72;
       margin-bottom: 20px;
     }
 
-    #firmware-select {
+    #version-select {
       width: 100%;
       padding: 10px;
       margin-bottom: 20px;
@@ -94,30 +89,28 @@
       border-radius: 4px;
     }
 
-    #install-button {
-      background-color: #4CAF50;
-      border: none;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 4px;
+    #instructions {
+      text-align: left;
+      margin-bottom: 20px;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.8; transform: scale(1.05); }
+    #instructions ol {
+      padding-left: 20px;
+    }
+
+    #instructions li {
+      margin-bottom: 10px;
+    }
+
+
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #666;
     }
   </style>
 </head>
-<script
-    type="module"
-    src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"
-></script>
 <body>
 <div class="title-container">
   <div class="logo-container">
@@ -125,19 +118,41 @@
   </div>
   <div class="text-container">
     <h1 class="main-title">VayuVani</h1>
-    <p class="sub-title">Groundstation firmware Installer</p>
+    <p class="sub-title">Groundstation Firmware Installer</p>
   </div>
 </div>
 
 <div id="content">
-  <p>Select firmware version:</p>
+  <h2>Install Firmware</h2>
+
+  <div id="instructions">
+    <h3>Instructions:</h3>
+    <ol>
+      <li>Connect your ESP32 device to your computer using a USB cable.</li>
+      <li>Select the firmware version you want to install from the dropdown menu below.</li>
+      <li>Click the "Connect" button to begin the installation process.</li>
+      <li>Follow the on-screen prompts to complete the installation.</li>
+      <li>Once the installation is completed, watch for <code>VayuVani-Setup</code> Wifi.</li>
+      <li>Connect to this WiFi with the default password is <code>vayuvani</code>.</li>
+      <li>Once connected head on to <a href="http://192.168.4.1/config">192.168.4.1/config</a> for further configuration</li>
+    </ol>
+  </div>
+
+  <label for="version-select">Select firmware version:</label>
   <select id="version-select">
     <option value="">-- Loading Versions --</option>
   </select>
-  <p class="button-row" align="center">
-    <!-- Placeholder for the install button -->
-  <div id="install-button-container"></div>
+
+  <div id="install-button-container">
+    <!-- ESP Web Installer button will be inserted here -->
+  </div>
 </div>
+
+<footer>
+  <p>Special thanks to the <a href="https://tinygs.com">TinyGS project</a> for their contributions. This installer is inspired from <a href="https://installer.tinygs.com/">TinyGS installer</a>. </p>
+  <p>Web installer powered by <a href="https://esphome.github.io/esp-web-tools/" target="_blank">ESP Web Tools</a>.</p>
+</footer>
+
 <script>
   const versionSelect = document.getElementById('version-select');
   const installButtonContainer = document.getElementById('install-button-container');
