@@ -25,7 +25,7 @@
       "chipFamily": "ESP32-S3",
       "parts": [
         {
-          "path": "./versions/1.0.0-prealpha-92-gb7c4967-20240922/VayuVani-1.0.0-prealpha-100-gdfcf87c-20240926-esp32s3_merged.bin",
+          "path": "./versions/1.0.0-prealpha-92-gb7c4967-20240922/VayuVani-1.0.0-prealpha-92-gb7c4967-20240922-esp32s3_merged.bin",
           "offset": 0
         }
       ]
